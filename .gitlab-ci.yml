@@ -1,0 +1,224 @@
+# GitLab CI Configuration for kern-kolibri-kit
+#
+# Required GitLab Variables (Settings > CI/CD > Variables):
+# - ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES: Personal access token with 'api' or 'write_repository' scope
+#   Used by the update-snapshots job to push snapshot changes back to the repository.
+#   Create at: GitLab Profile > Access Tokens > Add new token
+#   Scopes: api (full access) or write_repository (repository write access)
+#
+# - NPM_TOKEN: npm authentication token for publishing to npmjs.org
+#   Used by the publish jobs to authenticate with npm registry
+#   Create at: npmjs.com > Account Settings > Access Tokens > Generate New Token
+#   Recommended: Automation token type
+#
+variables:
+  NODE_VERSION: '22'
+  PNPM_VERSION: '10'
+
+stages:
+  - ci # Quality checks, tests, and builds
+  - publish # Package publication to npm
+
+# Einfacher GitLab Cache für pnpm
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - node_modules/
+    - ~/.pnpm-store
+
+.node_setup: &node_setup
+  before_script:
+    - npm i -g pnpm@${PNPM_VERSION:-10}
+
+# PIPELINE 1: AUTOMATISCHE QUALITY CHECKS
+quality-check:
+  stage: ci
+  image: node:${NODE_VERSION}
+  <<: *node_setup
+  script:
+    - pnpm install --frozen-lockfile
+    - echo "🔍 Running code quality checks..."
+    - pnpm exec playwright install --with-deps firefox
+    - pnpm build
+    - pnpm format
+    - pnpm lint
+    - pnpm unused
+    # Increase Playwright webServer timeout for CI environment
+    - export PLAYWRIGHT_WEBSERVER_TIMEOUT=180000
+    - pnpm test
+    - echo "✅ Quality check completed"
+  artifacts:
+    when: on_failure
+    expire_in: 1 week
+    paths:
+      - 'test-results/'
+  rules:
+    # NUR bei Commits und MRs - NICHT bei manuellen Starts
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH =~ /^release\/.*/
+
+# PIPELINE 2: MANUELLE SNAPSHOT UPDATES
+update-snapshots:
+  stage: ci
+  image: node:${NODE_VERSION}
+  <<: *node_setup
+  script:
+    - pnpm install --no-frozen-lockfile
+    - pnpm exec playwright install --with-deps firefox
+    - echo "📸 Starting snapshot update..."
+    - pnpm build
+    - |
+      if [ "$DELETE_SNAPSHOTS" = "true" ]; then
+        echo "🗑️ Deleting existing snapshots..."
+        rm -rf snapshots/*
+      fi
+    # Increase Playwright webServer timeout for CI environment
+    - export PLAYWRIGHT_WEBSERVER_TIMEOUT=180000
+    - pnpm test-update
+    - git config user.name "kern-ux.bot"
+    - git config user.email "kern-ux.bot@opencode.de"
+    - |
+      if [ -n "$(git status --porcelain snapshots/)" ]; then
+        git add snapshots/
+        git commit -m "Update visual test snapshots"
+        echo "📤 Attempting to push snapshot updates..."
+
+        # Check if access token is available
+        if [ -z "$ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES" ]; then
+          echo "❌ ERROR: ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES variable is not set"
+          echo "Please configure this variable in GitLab project settings:"
+          echo "Settings > CI/CD > Variables > Add Variable"
+          echo "Name: ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES"
+          echo "Value: [Your personal access token with write permissions]"
+          echo "Scope: Not protected, Masked"
+          exit 1
+        fi
+
+        # Use personal access token for pushing snapshot updates
+        git remote set-url origin "https://oauth2:${ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+
+        # Try to push with better error handling
+        if git push origin HEAD:$CI_COMMIT_REF_NAME; then
+          echo "✅ Snapshots updated successfully"
+        else
+          echo "❌ Failed to push snapshot updates"
+          echo "Please check:"
+          echo "1. ACCESS_TOKEN_FOR_SNAPSHOT_UPDATES has correct permissions (write access to repository)"
+          echo "2. Token has not expired"
+          echo "3. Token scope includes 'api' or 'write_repository'"
+          exit 1
+        fi
+      else
+        echo "ℹ️ No snapshot changes detected"
+      fi
+  variables:
+    DELETE_SNAPSHOTS: 'false'
+  rules:
+    # NUR bei manuellen Web UI Starts
+    - if: $CI_PIPELINE_SOURCE == "web"
+  when: manual
+  allow_failure: true
+  resource_group: snapshot-updates
+  artifacts:
+    when: always
+    expire_in: 1 week
+    paths:
+      - 'test-results/'
+
+# PIPELINE 3: NPM PACKAGE PUBLICATION
+
+# Publish to npm (manual trigger for development branches)
+publish-npm-manual:
+  stage: publish
+  image: node:${NODE_VERSION}
+  <<: *node_setup
+  script:
+    - pnpm install --frozen-lockfile
+    - echo "🔨 Building package..."
+    - pnpm build
+    - echo "📦 Preparing npm publication..."
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    - |
+      if [ -z "$NPM_TOKEN" ]; then
+        echo "❌ ERROR: NPM_TOKEN variable is not set"
+        echo "Please configure this variable in GitLab project settings:"
+        echo "Settings > CI/CD > Variables > Add Variable"
+        echo "Name: NPM_TOKEN"
+        echo "Value: [Your npm authentication token]"
+        exit 1
+      fi
+    - echo "🚀 Publishing to npm..."
+    - pnpm publish --no-git-checks --access public
+    - echo "✅ Package published successfully to npmjs.org"
+  rules:
+    # Manual publication for main/develop branches
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "develop"
+  when: manual
+  environment:
+    name: npmjs
+    url: https://www.npmjs.com/package/@kern-ux/theme-kolibri
+  artifacts:
+    paths:
+      - dist/
+      - assets/
+    expire_in: 1 week
+
+# Publish to npm (automatic on version tags)
+publish-npm-tag:
+  stage: publish
+  image: node:${NODE_VERSION}
+  <<: *node_setup
+  script:
+    - pnpm install --frozen-lockfile
+    - echo "🔨 Building package..."
+    - pnpm build
+    - echo "📦 Preparing npm publication for tag ${CI_COMMIT_TAG}..."
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+    - |
+      if [ -z "$NPM_TOKEN" ]; then
+        echo "❌ ERROR: NPM_TOKEN variable is not set"
+        exit 1
+      fi
+    - |
+      if [[ "$CI_COMMIT_TAG" =~ -rc\. ]] || [[ "$CI_COMMIT_TAG" =~ -beta\. ]] || [[ "$CI_COMMIT_TAG" =~ -alpha\. ]]; then
+        echo "🚀 Publishing pre-release version ${CI_COMMIT_TAG} with tag 'next'"
+        pnpm publish --no-git-checks --access public --tag next
+      else
+        echo "🚀 Publishing stable version ${CI_COMMIT_TAG} with tag 'latest'"
+        pnpm publish --no-git-checks --access public --tag latest
+      fi
+    - echo "✅ Package version ${CI_COMMIT_TAG} published successfully to npmjs.org"
+  rules:
+    # Automatic publication for version tags
+    - if: $CI_COMMIT_TAG =~ /^v?\d+\.\d+\.\d+/
+  environment:
+    name: npmjs
+    url: https://www.npmjs.com/package/@kern-ux/theme-kolibri
+  artifacts:
+    paths:
+      - dist/
+      - assets/
+    expire_in: 1 month
+
+# Dry-run publish (for testing in merge requests)
+publish-npm-dryrun:
+  stage: publish
+  image: node:${NODE_VERSION}
+  <<: *node_setup
+  script:
+    - pnpm install --frozen-lockfile
+    - echo "🔨 Building package..."
+    - pnpm build
+    - echo "🧪 Running npm publish dry-run..."
+    - pnpm publish --dry-run --no-git-checks --access public
+    - echo "✅ Dry-run completed - package is ready for publication"
+  rules:
+    # Available in merge requests for testing
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  when: manual
+  allow_failure: true

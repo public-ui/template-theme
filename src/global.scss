@@ -1,0 +1,46 @@
+// @use '~@kern-ux/native/src/scss/core/tokens/_index';
+@use '~@public-ui/components/index' as *;
+@use './global/icons' as *;
+
+@layer kol-theme-global {
+	// Properties
+	:host {
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+      background-color: #000028;
+      color: #fff;
+    }
+
+    @media (prefers-color-scheme: light) {
+      color-scheme: light;
+    }
+
+		--font-family: sans-serif;
+
+		font-family: var(--font-family);
+		font-size: to-rem(14);
+	}
+
+	// Tooltip
+	.kol-tooltip {
+		&__floating {
+			border-radius: 4px;
+			border: 1px solid #bbb;
+		}
+
+		&__arrow {
+			background-color: #bbb;
+
+		}
+
+		&__content {
+			color: #000;
+			background-color: #fff;
+			border-radius: 4px;
+			max-width: to-rem(400);
+			padding: to-rem(6) to-rem(12);
+
+			line-height: 1.55;
+		}
+	}
+}
