@@ -1,9 +1,9 @@
 @import url('./assets/codicons/codicon.css');
 
 @media (prefers-color-scheme: dark) {
-  body {
-    color: #ffffff;
-    background-color: #000028;
-    color-scheme: dark;
-  }
+	body {
+		color: #ffffff;
+		background-color: #000028;
+		color-scheme: dark;
+	}
 }

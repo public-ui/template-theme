@@ -1,7 +1,6 @@
 @use '~@public-ui/components/index' as *;
 @use './global/properties' as *;
 
-
 @layer kol-theme-global {
 	// Properties
 	:host {
@@ -15,7 +14,7 @@
 		@media (prefers-color-scheme: light) {
 			color-scheme: light;
 		}
-      	color: inherit;
+		color: inherit;
 
 		background-color: inherit;
 
@@ -32,7 +31,6 @@
 
 		&__arrow {
 			background-color: #bbb;
-
 		}
 
 		&__content {
