@@ -2,8 +2,8 @@
 
 @mixin button($block-classname) {
 	.#{$block-classname} {
-		background-color: var(--accent-color);
 		color: var(--text-contrast-color);
+		background-color: var(--accent-color);
 
 
 		&:disabled {
