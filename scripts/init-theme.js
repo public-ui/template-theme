@@ -83,8 +83,8 @@ function main() {
 		{
 			path: path.join(projectRoot, 'package.json'),
 			replacements: [
-				['KERN_V2', screamingSnakeCaseName],
 				['MY_THEME', screamingSnakeCaseName],
+				['KERN_V2', screamingSnakeCaseName],
 			],
 		},
 		{
