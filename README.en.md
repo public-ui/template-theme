@@ -100,12 +100,12 @@ After copying the assets you need to include them in your application:
 
 ```typescript
 import { register } from '@public-ui/components';
-import { KERN_V2 } from '@kern-ux/theme-kolibri';
+import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(KERN_V2, defineCustomElements)
+register(FIRMA_THEME, defineCustomElements)
 	.then(() => {
-		// KERN theme "kern-v2" and
+		// Theme "firma-theme" and
 		// KoliBri components are ready
 	})
 	.catch(console.warn);
@@ -143,12 +143,12 @@ After installation you can use the KoliBri components with the KERN theme direct
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { KERN_V2 } from '@kern-ux/theme-kolibri';
+			import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(KERN_V2, defineCustomElements)
+			register(FIRMA_THEME, defineCustomElements)
 				.then(() => {
-					console.log('KERN theme "kern-v2" loaded successfully');
+					console.log('Theme "firma-theme" loaded successfully');
 				})
 				.catch(console.warn);
 		</script>

@@ -76,7 +76,7 @@ src/
 ├── kern/                    # Local KERN tokens & utilities
 ├── mixins/                  # Sass mixins and utilities (no layers)
 ├── globals.d.ts             # TypeScript declarations for SCSS modules
-└── index.ts                 # Theme entry point (exports `KERN_V2`)
+└── index.ts                 # Theme entry point (exports `FIRMA_THEME`)
 ```
 
 **IMPORTANT**: The project relies on `@kern-ux/native` wherever possible. Because some tokens are not yet consumable from the package, the local files in `src/kern/` remain part of the theme.

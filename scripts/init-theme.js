@@ -68,60 +68,40 @@ function main() {
 			path: path.join(projectRoot, 'src', 'index.ts'),
 			replacements: [
 				['MY_THEME', screamingSnakeCaseName],
-				['KERN_V2', screamingSnakeCaseName],
 				["'my-theme'", `'${kebabCaseName}'`],
-				["'kern-v2'", `'${kebabCaseName}'`],
 			],
 		},
 		{
 			path: path.join(projectRoot, 'serve.sh'),
-			replacements: [
-				['MY_THEME', screamingSnakeCaseName],
-				['KERN_V2', screamingSnakeCaseName],
-			],
+			replacements: [['MY_THEME', screamingSnakeCaseName]],
 		},
 		{
 			path: path.join(projectRoot, 'package.json'),
-			replacements: [
-				['MY_THEME', screamingSnakeCaseName],
-				['KERN_V2', screamingSnakeCaseName],
-			],
+			replacements: [['MY_THEME', screamingSnakeCaseName]],
 		},
 		{
 			path: path.join(projectRoot, 'README.md'),
 			replacements: [
-				['KERN_V2', screamingSnakeCaseName],
 				['MY_THEME', screamingSnakeCaseName],
-				["'kern-v2'", `'${kebabCaseName}'`],
 				["'my-theme'", `'${kebabCaseName}'`],
-				['"kern-v2"', `"${kebabCaseName}"`],
 				['"my-theme"', `"${kebabCaseName}"`],
 			],
 		},
 		{
 			path: path.join(projectRoot, 'README.en.md'),
 			replacements: [
-				['KERN_V2', screamingSnakeCaseName],
 				['MY_THEME', screamingSnakeCaseName],
-				["'kern-v2'", `'${kebabCaseName}'`],
 				["'my-theme'", `'${kebabCaseName}'`],
-				['"kern-v2"', `"${kebabCaseName}"`],
 				['"my-theme"', `"${kebabCaseName}"`],
 			],
 		},
 		{
 			path: path.join(projectRoot, 'CONTRIBUTING.md'),
-			replacements: [
-				['KERN_V2', screamingSnakeCaseName],
-				['MY_THEME', screamingSnakeCaseName],
-			],
+			replacements: [['MY_THEME', screamingSnakeCaseName]],
 		},
 		{
 			path: path.join(projectRoot, 'CONTRIBUTING.en.md'),
-			replacements: [
-				['KERN_V2', screamingSnakeCaseName],
-				['MY_THEME', screamingSnakeCaseName],
-			],
+			replacements: [['MY_THEME', screamingSnakeCaseName]],
 		},
 	];
 

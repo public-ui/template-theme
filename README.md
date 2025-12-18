@@ -100,12 +100,12 @@ Nach dem Kopieren der Assets müssen diese in Ihrer Anwendung eingebunden werden
 
 ```typescript
 import { register } from '@public-ui/components';
-import { KERN_V2 } from '@kern-ux/theme-kolibri';
+import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(KERN_V2, defineCustomElements)
+register(FIRMA_THEME, defineCustomElements)
 	.then(() => {
-		// KERN-Theme "kern-v2" und
+		// Theme "firma-theme" und
 		// KoliBri-Komponenten sind geladen
 	})
 	.catch(console.warn);
@@ -143,12 +143,12 @@ Nach der Installation können Sie die KoliBri-Komponenten mit dem KERN-Theme dir
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { KERN_V2 } from '@kern-ux/theme-kolibri';
+			import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(KERN_V2, defineCustomElements)
+			register(FIRMA_THEME, defineCustomElements)
 				.then(() => {
-					console.log('KERN Theme "kern-v2" erfolgreich geladen');
+					console.log('Theme "firma-theme" erfolgreich geladen');
 				})
 				.catch(console.warn);
 		</script>
