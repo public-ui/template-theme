@@ -1,5 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignoreDependencies": ["@kern-ux/native", "@playwright/test", "@public-ui/visual-tests", "nodemon", "sass", "serve"],
-  "project": ["src/**/*.ts"]
+  "ignore": ["stylelint-rules/index.js"],
+  "ignoreDependencies": ["@public-ui/visual-tests", "nodemon", "sass"],
+  "ignoreUnresolved":["~@public-ui/components"]
 }

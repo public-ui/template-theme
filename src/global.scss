@@ -1,27 +1,18 @@
-// @use '~@kern-ux/native/src/scss/core/tokens/_index';
 @use '~@public-ui/components/index' as *;
-@use './global/icons' as *;
 
 @layer kol-theme-global {
 	// Properties
 	:host {
-		@media (prefers-color-scheme: dark) {
-			color: #fff;
-			background-color: #000028;
-			color-scheme: dark;
-		}
-
-		@media (prefers-color-scheme: light) {
-			color-scheme: light;
-		}
-
 		--font-family: sans-serif;
+	}
 
+	// Base styles
+	:host {
 		font-family: var(--font-family);
 		font-size: to-rem(14);
 	}
 
-	// Tooltip
+	// Tooltip styles
 	.kol-tooltip {
 		&__floating {
 			border-radius: 4px;
