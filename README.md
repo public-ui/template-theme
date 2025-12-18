@@ -1,33 +1,13 @@
 > [English version](./README.en.md)
 
-# KERN UX-Standard Theme für KoliBri
+# Benutzerdefinertes Theme für KoliBri
 
-Ein benutzerdefiniertes Theme für die barrierefreie Komponentenbibliothek [KoliBri](https://github.com/public-ui/kolibri), dass das KERN-UX Design System implementiert.
-
-## Warum KoliBri für KERN verwenden?
-
-**Barrierefreiheit ist wichtig.** Aber es ist schwer, alles richtig zu machen.
-
-KoliBri macht es einfacher:
-
-- **Bereits barrierefrei**: Alle Komponenten sind schon barrierefrei gebaut
-- **Gut getestet**: Experten haben die Barrierefreiheit geprüft
-- **Einfach zu nutzen**: Sie müssen nicht alles selbst programmieren
-- **KERN Design**: Durch dieses Theme sehen die Komponenten aus wie KERN es vorgibt
-
-**Das bedeutet für Sie:**
-
-- Weniger Arbeit beim Programmieren
-- Sicher sein, dass alles barrierefrei ist
-- Mehr Zeit für wichtige Funktionen
-- Automatisch das richtige KERN-Design
-
-KERN nutzt KoliBri, weil die Komponenten "headless" sind. Das heißt: Die Barrierefreiheit funktioniert schon. Wir geben "nur" das KERN-Design dazu.
+Ein benutzerdefiniertes Theme für die barrierefreie Komponentenbibliothek [KoliBri](https://github.com/public-ui/kolibri).
 
 ## Installation
 
 ```bash
-npm install @kern-ux/theme-kolibri @public-ui/components
+npm install @your-scope/theme-kolibri @public-ui/components
 ```
 
 ### Assets kopieren
@@ -44,8 +24,8 @@ Erstellen Sie dann npm-Scripts in Ihrer `package.json`:
 {
 	"scripts": {
 		"postinstall": "npm run copy-assets",
-		"copy-assets": "npm run copy-kern-assets && npm run copy-kolibri-assets",
-		"copy-kern-assets": "cpy 'node_modules/@kern-ux/theme-kolibri/assets/**' 'public/assets/theme' --parents",
+		"copy-assets": "npm run copy-theme-assets && npm run copy-kolibri-assets",
+		"copy-theme-assets": "cpy 'node_modules/@your-scope/theme-kolibri/assets/**' 'public/assets/theme' --parents",
 		"copy-kolibri-assets": "cpy 'node_modules/@public-ui/components/assets/**' 'public/assets/theme' --parents"
 	}
 }
@@ -70,13 +50,9 @@ Nach dem Kopieren der Assets müssen diese in Ihrer Anwendung eingebunden werden
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>KERN UX Theme Demo</title>
+		<title>Theme Demo</title>
 
-		<!-- KERN Theme Assets -->
-		<link rel="stylesheet" href="/assets/theme/material-symbols-subset/style.css" />
-		<link rel="stylesheet" href="/assets/theme/fira-sans-v17-latin/style.css" />
-
-		<!-- KoliBri Assets (falls benötigt) -->
+		<!-- KoliBri Assets -->
 		<link rel="stylesheet" href="/assets/theme/codicon.css" />
 	</head>
 	<body>
@@ -89,10 +65,6 @@ Nach dem Kopieren der Assets müssen diese in Ihrer Anwendung eingebunden werden
 
 ```scss
 // In Ihrer main.scss oder styles.scss
-@import url('/assets/theme/material-symbols-subset/style.css');
-@import url('/assets/theme/fira-sans-v17-latin/style.css');
-
-// KoliBri Assets (falls benötigt)
 @import url('/assets/theme/codicon.css');
 ```
 
@@ -100,20 +72,18 @@ Nach dem Kopieren der Assets müssen diese in Ihrer Anwendung eingebunden werden
 
 ```typescript
 import { register } from '@public-ui/components';
-import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
+import { MY_THEME } from '@your-scope/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(FIRMA_THEME, defineCustomElements)
+register(MY_THEME, defineCustomElements)
 	.then(() => {
-		// Theme "firma-theme" und
-		// KoliBri-Komponenten sind geladen
+		// Theme und KoliBri-Komponenten sind geladen
 	})
 	.catch(console.warn);
 ```
 
 ## Features
 
-- 🎨 **Kern Design System** - Offizielle Kern Styling-Richtlinien
 - ♿ **Barrierefrei** - WCAG-konforme Styles mit korrekten Kontrastverhältnissen
 - 📱 **Responsive** - Mobile-First-Ansatz
 - 🔧 **CSS Layers** - Moderne Layer-Architektur für bessere Wartbarkeit
@@ -126,7 +96,7 @@ Beim Einsatz von Adaptive Styles können globale `CSS` Custom Properties mit den
 
 ### HTML-Verwendung
 
-Nach der Installation können Sie die KoliBri-Komponenten mit dem KERN-Theme direkt in HTML verwenden:
+Nach der Installation können Sie die KoliBri-Komponenten mit dem Theme direkt in HTML verwenden:
 
 ```html
 <!doctype html>
@@ -134,21 +104,21 @@ Nach der Installation können Sie die KoliBri-Komponenten mit dem KERN-Theme dir
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>KERN UX Theme Demo</title>
+		<title>Theme Demo</title>
 	</head>
 	<body>
-		<kol-button _label="KERN Button"></kol-button>
+		<kol-button _label="Button"></kol-button>
 		<kol-input-text _label="Name" _placeholder="Ihr Name"></kol-input-text>
-		<kol-card _headline="KERN Card"> Inhalt der Karte mit KERN Styling </kol-card>
+		<kol-card _headline="Card">Inhalt der Karte mit Styling</kol-card>
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
+			import { MY_THEME } from '@your-scope/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(FIRMA_THEME, defineCustomElements)
+			register(MY_THEME, defineCustomElements)
 				.then(() => {
-					console.log('Theme "firma-theme" erfolgreich geladen');
+					console.log('Theme erfolgreich geladen');
 				})
 				.catch(console.warn);
 		</script>
@@ -156,15 +126,10 @@ Nach der Installation können Sie die KoliBri-Komponenten mit dem KERN-Theme dir
 </html>
 ```
 
-## Unterstützung
-
-Bei Problemen während der Entwicklung oder dem Build-Prozess schauen Sie bitte in die [CONTRIBUTING.md](./CONTRIBUTING.md) für detaillierte Lösungsansätze.
-
 ## Lizenz
 
 Dieses Projekt steht unter der [European Union Public Licence (EUPL) v1.2](https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12). Die EUPL ist eine Open-Source-Lizenz, die von der Europäischen Kommission entwickelt wurde und mit anderen bekannten Open-Source-Lizenzen kompatibel ist.
 
 ## Verwandte Projekte
 
-- [KERN UX-Standard](https://www.kern-ux.de)
 - [KoliBri - Der barrierefreie HTML-Standard](https://public-ui.github.io/)

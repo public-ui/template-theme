@@ -1,5 +1,5 @@
 {
-  "name": "@kern-ux-annex/theme-kolibri",
+  "name": "my-theme",
   "version": "2.3.2",
   "description": "This package contains the KERN-UX style information to make KoliBri web components look as specified by the KERN UX design system.",
   "license": "EUPL-1.2",

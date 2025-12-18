@@ -1,33 +1,13 @@
 [German version](./README.md)
 
-# KERN UX standard theme for KoliBri
+# Custom theme for KoliBri
 
-A custom theme for the accessible component library [KoliBri](https://github.com/public-ui/kolibri) that implements the KERN UX design system.
-
-## Why use KoliBri for KERN?
-
-**Accessibility matters.** But getting every detail right is hard.
-
-KoliBri makes it easier:
-
-- **Accessible out of the box** – all components are built with accessibility in mind
-- **Well tested** – accessibility has been reviewed by experts
-- **Easy to use** – you don’t have to implement everything yourself
-- **KERN design** – this theme provides the official KERN look & feel
-
-**What this means for you:**
-
-- Less implementation effort
-- Confidence that the result is accessible
-- More time for core features
-- Automatic KERN styling
-
-KERN uses KoliBri because the components are “headless”. Accessibility is already solved – this theme simply adds the KERN design.
+A custom theme for the accessible component library [KoliBri](https://github.com/public-ui/kolibri).
 
 ## Installation
 
 ```bash
-npm install @kern-ux/theme-kolibri @public-ui/components
+npm install @your-scope/theme-kolibri @public-ui/components
 ```
 
 ### Copy assets
@@ -44,8 +24,8 @@ Then create npm scripts in your `package.json`:
 {
 	"scripts": {
 		"postinstall": "npm run copy-assets",
-		"copy-assets": "npm run copy-kern-assets && npm run copy-kolibri-assets",
-		"copy-kern-assets": "cpy 'node_modules/@kern-ux/theme-kolibri/assets/**' 'public/assets/theme' --parents",
+		"copy-assets": "npm run copy-theme-assets && npm run copy-kolibri-assets",
+		"copy-theme-assets": "cpy 'node_modules/@your-scope/theme-kolibri/assets/**' 'public/assets/theme' --parents",
 		"copy-kolibri-assets": "cpy 'node_modules/@public-ui/components/assets/**' 'public/assets/theme' --parents"
 	}
 }
@@ -70,13 +50,9 @@ After copying the assets you need to include them in your application:
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>KERN UX Theme Demo</title>
+		<title>Theme Demo</title>
 
-		<!-- KERN theme assets -->
-		<link rel="stylesheet" href="/assets/theme/material-symbols-subset/style.css" />
-		<link rel="stylesheet" href="/assets/theme/fira-sans-v17-latin/style.css" />
-
-		<!-- KoliBri assets (if required) -->
+		<!-- KoliBri assets -->
 		<link rel="stylesheet" href="/assets/theme/codicon.css" />
 	</head>
 	<body>
@@ -89,10 +65,6 @@ After copying the assets you need to include them in your application:
 
 ```scss
 // In your main.scss or styles.scss
-@import url('/assets/theme/material-symbols-subset/style.css');
-@import url('/assets/theme/fira-sans-v17-latin/style.css');
-
-// KoliBri assets (if required)
 @import url('/assets/theme/codicon.css');
 ```
 
@@ -100,20 +72,18 @@ After copying the assets you need to include them in your application:
 
 ```typescript
 import { register } from '@public-ui/components';
-import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
+import { MY_THEME } from '@your-scope/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(FIRMA_THEME, defineCustomElements)
+register(MY_THEME, defineCustomElements)
 	.then(() => {
-		// Theme "firma-theme" and
-		// KoliBri components are ready
+		// Theme and KoliBri components are ready
 	})
 	.catch(console.warn);
 ```
 
 ## Features
 
-- 🎨 **KERN Design System** – official KERN styling guidelines
 - ♿ **Accessible** – WCAG compliant styles with proper contrast ratios
 - 📱 **Responsive** – mobile-first styling
 - 🔧 **CSS layers** – modern layer architecture for maintainability
@@ -126,7 +96,7 @@ When using adaptive styles, global CSS custom properties can collide with applic
 
 ### HTML usage
 
-After installation you can use the KoliBri components with the KERN theme directly in HTML:
+After installation you can use the KoliBri components with the theme directly in HTML:
 
 ```html
 <!doctype html>
@@ -137,18 +107,18 @@ After installation you can use the KoliBri components with the KERN theme direct
 		<title>KERN UX Theme Demo</title>
 	</head>
 	<body>
-		<kol-button _label="KERN Button"></kol-button>
+		<kol-button _label="Button"></kol-button>
 		<kol-input-text _label="Name" _placeholder="Your name"></kol-input-text>
-		<kol-card _headline="KERN Card"> Content of the card with KERN styling </kol-card>
+		<kol-card _headline="Card"> Content of the card with styling </kol-card>
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { FIRMA_THEME } from '@kern-ux/theme-kolibri';
+			import { MY_THEME } from '@your-scope/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(FIRMA_THEME, defineCustomElements)
+			register(MY_THEME, defineCustomElements)
 				.then(() => {
-					console.log('Theme "firma-theme" loaded successfully');
+					console.log('Theme loaded successfully');
 				})
 				.catch(console.warn);
 		</script>
