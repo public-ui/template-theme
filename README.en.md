@@ -72,10 +72,10 @@ After copying the assets you need to include them in your application:
 
 ```typescript
 import { register } from '@public-ui/components';
-import { MY_THEME } from '@your-scope/theme-kolibri';
+import { CUSTOM_THEME } from '@your-scope/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(MY_THEME, defineCustomElements)
+register(CUSTOM_THEME, defineCustomElements)
 	.then(() => {
 		// Theme and KoliBri components are ready
 	})
@@ -113,10 +113,10 @@ After installation you can use the KoliBri components with the theme directly in
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { MY_THEME } from '@your-scope/theme-kolibri';
+			import { CUSTOM_THEME } from '@your-scope/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(MY_THEME, defineCustomElements)
+			register(CUSTOM_THEME, defineCustomElements)
 				.then(() => {
 					console.log('Theme loaded successfully');
 				})

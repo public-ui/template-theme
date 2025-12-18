@@ -72,10 +72,10 @@ Nach dem Kopieren der Assets müssen diese in Ihrer Anwendung eingebunden werden
 
 ```typescript
 import { register } from '@public-ui/components';
-import { MY_THEME } from '@your-scope/theme-kolibri';
+import { CUSTOM_THEME } from '@your-scope/theme-kolibri';
 import { defineCustomElements } from '@public-ui/components/loader';
 
-register(MY_THEME, defineCustomElements)
+register(CUSTOM_THEME, defineCustomElements)
 	.then(() => {
 		// Theme und KoliBri-Komponenten sind geladen
 	})
@@ -113,10 +113,10 @@ Nach der Installation können Sie die KoliBri-Komponenten mit dem Theme direkt i
 
 		<script type="module">
 			import { register } from '@public-ui/components';
-			import { MY_THEME } from '@your-scope/theme-kolibri';
+			import { CUSTOM_THEME } from '@your-scope/theme-kolibri';
 			import { defineCustomElements } from '@public-ui/components/loader';
 
-			register(MY_THEME, defineCustomElements)
+			register(CUSTOM_THEME, defineCustomElements)
 				.then(() => {
 					console.log('Theme erfolgreich geladen');
 				})

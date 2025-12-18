@@ -4,7 +4,7 @@ import linkButtonCss from './components/link-button.scss';
 
 import globalCss from './global.scss';
 
-export const MY_THEME = KoliBri.createTheme('my-theme', {
+export const CUSTOM_THEME = KoliBri.createTheme('custom-theme', {
 	GLOBAL: globalCss,
 	'KOL-BUTTON': buttonCss,
 	'KOL-LINK-BUTTON': linkButtonCss,
