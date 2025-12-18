@@ -1,22 +1,7 @@
 {
   "name": "custom-theme",
-  "version": "2.3.2",
-  "description": "This package contains the KERN-UX style information to make KoliBri web components look as specified by the KERN UX design system.",
-  "license": "EUPL-1.2",
-  "homepage": "https://www.kern-ux.de",
-  "repository": {
-    "type": "git",
-    "url": "https://gitlab.opencode.de/kern-ux/kern-developer-kit"
-  },
-  "bugs": {
-    "url": "https://gitlab.opencode.de/kern-ux/kern-developer-kit/-/issues"
-  },
-  "contributors": [
-    "Axel Wolters <axel.wolters@sk.hamburg.de>",
-    "Darko Pervan <darko.pervan@dataport.de>",
-    "Tom Marienfeld <tom.marienfeld@dataport.de>",
-    "Informationstechnikzentrum Bund <kolibri@itzbund.de>"
-  ],
+  "version": "1.0.0",
+  "description": "This package contains the style information to make KoliBri web components look as your custom design system.",
   "type": "module",
   "sideEffects": false,
   "scripts": {
@@ -30,6 +15,7 @@
     "lint:stylelint": "stylelint \"src/**/*.{css,scss}\"",
     "lint:tsc": "tsc --noemit",
     "prepack": "pnpm build",
+		"prepare": "cpy \"node_modules/@public-ui/components/assets/**/*\" assets --dot",
     "start": "npm-run-all2 --parallel dev serve",
     "serve": "sh serve.sh",
     "smoke-test": "pnpm clean && pnpm install && pnpm build && pnpm format && pnpm lint && pnpm unused && pnpm test",
@@ -41,40 +27,40 @@
     "update": "ncu -t minor -u && ncu"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "9.38.0",
-    "@kern-ux/native": "2.3.2",
-    "@playwright/test": "1.56.0",
-    "@public-ui/components": "3.0.8",
-    "@public-ui/visual-tests": "3.0.8",
-    "@rollup/plugin-commonjs": "28.0.8",
+    "@eslint/eslintrc": "3.3.3",
+    "@eslint/js": "9.39.2",
+    "@playwright/test": "1.57.0",
+    "@public-ui/components": "4.0.0-alpha.11",
+    "@public-ui/visual-tests": "4.0.0-alpha.11",
+    "@rollup/plugin-commonjs": "28.0.9",
     "@rollup/plugin-node-resolve": "16.0.3",
-    "@rollup/plugin-typescript": "12.1.4",
-    "@typescript-eslint/eslint-plugin": "8.46.1",
-    "@typescript-eslint/parser": "8.46.1",
+    "@rollup/plugin-typescript": "12.3.0",
+    "@typescript-eslint/eslint-plugin": "8.50.0",
+    "@typescript-eslint/parser": "8.50.0",
     "adopted-style-sheets": "1.1.9-rc.20",
-    "autoprefixer": "10.4.21",
+    "autoprefixer": "10.4.23",
+		"cpy-cli": "6.0.0",
     "cross-env": "10.1.0",
-    "eslint": "9.38.0",
-    "knip": "5.66.1",
-    "nodemon": "3.1.10",
-    "npm-check-updates": "19.1.1",
+    "eslint": "9.39.2",
+    "knip": "5.75.1",
+    "nodemon": "3.1.11",
+    "npm-check-updates": "19.2.0",
     "npm-run-all2": "8.0.4",
     "postcss": "8.5.6",
-    "prettier": "3.6.2",
+    "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",
-    "rollup": "4.52.5",
+    "rollup": "4.53.5",
     "rollup-plugin-postcss": "4.0.2",
-    "sass": "1.93.2",
-    "stylelint": "16.25.0",
+    "sass": "1.97.0",
+    "stylelint": "16.26.1",
     "stylelint-config-recommended-scss": "16.0.2",
     "stylelint-config-standard": "39.0.1",
     "stylelint-order": "7.0.0",
-    "stylelint-scss": "6.12.1",
+    "stylelint-scss": "6.13.0",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@public-ui/components": "3.0.8"
+    "@public-ui/components": "4.0.0-alpha.11"
   },
   "exports": {
     ".": {
