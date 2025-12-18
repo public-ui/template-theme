@@ -1,10 +1,22 @@
 @use '~@public-ui/components/index' as *;
+@use './global/properties' as *;
 
 @layer kol-theme-global {
 	// Properties
 	:host {
-		--font-family: sans-serif;
-	}
+		@include properties;
+
+		@media (prefers-color-scheme: dark) {
+			@include propertiesDark;
+			color-scheme: dark;
+		}
+
+		@media (prefers-color-scheme: light) {
+			color-scheme: light;
+		}
+		color: inherit;
+
+		background-color: inherit;
 
 	// Base styles
 	:host {
@@ -24,8 +36,8 @@
 		}
 
 		&__content {
-			color: #000;
-			background-color: #fff;
+			color: var(--text-contrast-color);
+			background-color: var(--tooltip-background-color);
 			border-radius: 4px;
 			max-width: to-rem(400);
 			padding: to-rem(6) to-rem(12);
