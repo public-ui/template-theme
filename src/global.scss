@@ -5,15 +5,15 @@
 @layer kol-theme-global {
 	// Properties
 	:host {
-    @media (prefers-color-scheme: dark) {
-      color-scheme: dark;
-      background-color: #000028;
-      color: #fff;
-    }
+		@media (prefers-color-scheme: dark) {
+			color-scheme: dark;
+			background-color: #000028;
+			color: #fff;
+		}
 
-    @media (prefers-color-scheme: light) {
-      color-scheme: light;
-    }
+		@media (prefers-color-scheme: light) {
+			color-scheme: light;
+		}
 
 		--font-family: sans-serif;
 
@@ -30,7 +30,6 @@
 
 		&__arrow {
 			background-color: #bbb;
-
 		}
 
 		&__content {
