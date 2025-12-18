@@ -2,15 +2,15 @@
 
 @mixin button($block-classname) {
 	.#{$block-classname} {
+		color: var(--text-contrast-color);
+		background-color: var(--accent-color);
 
 		&:disabled {
 			opacity: 0.4;
 		}
-    background-color: rgb(40, 40, 255);
-    color: #fff;
 
 		&--primary {
-			background-color: #980c07;
+			background-color: var(--primary-color);
 		}
 	}
 }
