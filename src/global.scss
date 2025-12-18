@@ -6,9 +6,9 @@
 	// Properties
 	:host {
 		@media (prefers-color-scheme: dark) {
-			color-scheme: dark;
-			background-color: #000028;
 			color: #fff;
+			background-color: #000028;
+			color-scheme: dark;
 		}
 
 		@media (prefers-color-scheme: light) {
