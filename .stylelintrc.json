@@ -9,7 +9,6 @@
     "./stylelint-rules/layer-name-convention",
     "./stylelint-rules/no-root-selector"
   ],
-  "ignoreFiles": ["src/kern/**/*"],
   "rules": {
     "kolibri/require-component-layer": true,
     "kolibri/require-global-layer": true,

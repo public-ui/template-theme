@@ -4,19 +4,14 @@
 @layer kol-theme-global {
 	// Properties
 	:host {
-		@include properties;
+		@include light;
+		color-scheme: light;
 
 		@media (prefers-color-scheme: dark) {
-			@include propertiesDark;
+			@include dark;
 			color-scheme: dark;
 		}
-
-		@media (prefers-color-scheme: light) {
-			color-scheme: light;
-		}
-		color: inherit;
-
-		background-color: inherit;
+	}
 
 	// Base styles
 	:host {

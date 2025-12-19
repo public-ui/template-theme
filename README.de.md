@@ -1,8 +1,8 @@
-[German version](./README.de.md)
+> [English version](./README.md)
 
-# Custom theme for KoliBri
+# Benutzerdefinertes Theme für KoliBri
 
-A custom theme for the accessible component library [KoliBri](https://github.com/public-ui/kolibri).
+Ein benutzerdefiniertes Theme für die barrierefreie Komponentenbibliothek [KoliBri](https://github.com/public-ui/kolibri).
 
 ## Installation
 
@@ -128,7 +128,7 @@ Nach der Installation können Sie die KoliBri-Komponenten mit dem Theme direkt i
 
 ## Support
 
-If you run into issues during development or the build process, take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed troubleshooting guidance.
+Wenn Sie während der Entwicklung oder des Build-Prozesses auf Probleme stoßen, schauen Sie sich [CONTRIBUTING.de.md](./CONTRIBUTING.de.md) für detaillierte Leitfäden zur Fehlerbehebung an.
 
 ## Lizenz
 

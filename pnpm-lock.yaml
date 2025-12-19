@@ -24,8 +24,8 @@ importers:
         specifier: 4.0.0-alpha.11
         version: 4.0.0-alpha.11(@playwright/test@1.57.0)(axe-core@4.11.0)(chromedriver@138.0.4)(esbuild@0.25.8)(jiti@2.6.1)(less@4.2.0)(playwright-core@1.57.0)(sass@1.97.0)
       '@rollup/plugin-commonjs':
-        specifier: 28.0.9
-        version: 28.0.9(rollup@4.53.5)
+        specifier: 29.0.0
+        version: 29.0.0(rollup@4.53.5)
       '@rollup/plugin-node-resolve':
         specifier: 16.0.3
         version: 16.0.3(rollup@4.53.5)
@@ -779,8 +779,8 @@ packages:
   '@rolldown/pluginutils@1.0.0-beta.47':
     resolution: {integrity: sha512-8QagwMH3kNCuzD8EWL8R2YPW5e4OrHNSAHRFDdmFqEwEaD/KcNKjVoumo+gP2vW5eKB2UPbM6vTYiGZX0ixLnw==}
 
-  '@rollup/plugin-commonjs@28.0.9':
-    resolution: {integrity: sha512-PIR4/OHZ79romx0BVVll/PkwWpJ7e5lsqFa3gFfcrFPWwLXLV39JVUzQV9RKjWerE7B845Hqjj9VYlQeieZ2dA==}
+  '@rollup/plugin-commonjs@29.0.0':
+    resolution: {integrity: sha512-U2YHaxR2cU/yAiwKJtJRhnyLk7cifnQw0zUpISsocBDoHDJn+HTV74ABqnwr5bEgWUwFZC9oFL6wLe21lHu5eQ==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
@@ -5789,7 +5789,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-beta.47': {}
 
-  '@rollup/plugin-commonjs@28.0.9(rollup@4.53.5)':
+  '@rollup/plugin-commonjs@29.0.0(rollup@4.53.5)':
     dependencies:
       '@rollup/pluginutils': 5.2.0(rollup@4.53.5)
       commondir: 1.0.1

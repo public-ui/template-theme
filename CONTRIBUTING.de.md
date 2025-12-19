@@ -1,8 +1,8 @@
-[German version](./CONTRIBUTING.de.md)
+> [English version](./CONTRIBUTING.md)
 
-# Contributing to the `KoliBri` theme `KERN UX-Standard`
+# Contributing zum `KoliBri` Theme `KERN UX-Standard`
 
-Thank you for your interest in contributing to this project! This guide will help you get started.
+Vielen Dank für Ihr Interesse am Beitrag zu diesem Projekt! Diese Anleitung hilft Ihnen beim Einstieg.
 
 ## Entwicklungsumgebung einrichten
 
@@ -15,8 +15,8 @@ Thank you for your interest in contributing to this project! This guide will hel
 
 ```bash
 # Repository klonen
-git clone <your-repository-url>
-cd <your-theme-name>
+git clone https://gitlab.opencode.de/kern-ux/kern-developer-kit.git
+cd kern-developer-kit
 
 # Abhängigkeiten installieren
 pnpm install
@@ -51,7 +51,7 @@ Dieses Theme verwendet CSS Cascade Layers für vorhersagbares Styling:
 
 ### Dateiorganisation
 
-````text
+```text
 src/
 ├── components/              # Component-Styles (@layer kol-theme-component)
 │   ├── button.scss
@@ -59,9 +59,13 @@ src/
 │   └── ...
 ├── global.scss              # Globale Theme-Styles (@layer kol-theme-global)
 ├── global/                  # Zusätzliche globale Styles (z. B. Icons)
+├── tokens/                  # Lokale Design Tokens & Utilities
 ├── mixins/                  # Sass Mixins und Utilities (keine Layer)
 ├── globals.d.ts             # TypeScript Deklarationen für SCSS-Module
 └── index.ts                 # Theme-Einstiegspunkt (exportiert `CUSTOM_THEME`)
+```
+
+**WICHTIG**: Verwenden Sie Design Tokens aus Ihrem Design System Package, wenn verfügbar. Für Tokens, die noch nicht aus dem Package konsumierbar sind, verwalten Sie lokale Dateien in `src/tokens/` als Teil des Themes.
 
 ## Styling-Regeln
 
@@ -82,16 +86,93 @@ Custom Stylelint-Regeln stellen ordnungsgemäße Layer-Nutzung sicher:
 // ✅ Korrekt: :host für Web Component Styling
 @layer kol-theme-global {
 	:host {
-		--font-family: var(--theme-font-family);
+		--font-family: var(--kern-font-family);
 		background-color: white;
 		color: black;
 	}
 }
-@@ -169,189 +172,190 @@ Diese Regeln stellen sicher:
-}
-````
 
-2. Erstellen und testen:
+// ❌ Falsch: :root umgeht Web Component Encapsulation
+@layer kol-theme-global {
+	:root {
+		--font-family: var(--kern-font-family); // Triggers lint error
+	}
+}
+```
+
+**Grund**: `:root` Selektoren umgehen die Shadow DOM Kapselung von Web Components und können mit Host-Seiten-Styles kollidieren. `:host` hält das Styling isoliert innerhalb der Component.
+
+### Beispiel-Nutzung
+
+```scss
+// ✅ Korrekt: Component-Datei mit Layer
+// src/components/button.scss
+@layer kol-theme-component {
+	.button {
+		background: var(--kern-color-primary);
+		border-radius: var(--kern-border-radius);
+	}
+}
+
+// ✅ Korrekt: Global-Datei mit Layer und :host
+// src/global.scss
+@layer kol-theme-global {
+	:host {
+		--font-family: var(--kern-font-family);
+	}
+}
+
+// ✅ Korrekt: Utility-Datei ohne Layer
+// src/mixins/typography.scss
+@mixin kern-heading-style {
+	font-family: var(--kern-font-family);
+	font-weight: bold;
+}
+
+// ❌ Falsch: Component-Datei ohne Layer
+// src/components/button.scss
+.button {
+	background: red; // Triggers lint error
+}
+```
+
+## Custom Stylelint-Regeln
+
+### Regel-Übersicht
+
+| Regel                                     | Zweck                                         | Gilt für                  |
+| ----------------------------------------- | --------------------------------------------- | ------------------------- |
+| `kolibri/require-component-layer`         | Erzwingt `@layer kol-theme-component` Nutzung | `src/components/*.scss`   |
+| `kolibri/require-global-layer`            | Erzwingt `@layer kol-theme-global` Nutzung    | `src/global.scss`         |
+| `kolibri/no-layer-in-non-component-files` | Verhindert Layer-Nutzung in Utility-Dateien   | Alle anderen SCSS-Dateien |
+| `kolibri/layer-name-convention`           | Warnt vor nicht-Standard Layer-Namen          | Alle Dateien              |
+| `kolibri/no-root-selector`                | Verhindert `:root` zugunsten von `:host`      | `src/**/*.scss`           |
+
+### Regel-Details
+
+Diese Regeln garantieren:
+
+- **100% CSS-Abdeckung** – ALLES CSS muss in den entsprechenden Layern sein
+- **Keine Ausnahmen** – Variablen, Selektoren, Deklarationen, At-Regeln werden alle validiert
+- **Klare Trennung** – Components vs. global vs. Utility-Styling
+- **Wartbarkeit** – vorhersagbares Cascade-Verhalten
+
+## Entwicklungs-Workflow
+
+### Neue Component-Styles hinzufügen
+
+1. Component-Datei in `src/components/` erstellen:
+
+```scss
+// src/components/new-component.scss
+@layer kol-theme-component {
+	.new-component {
+		// Your styles here
+	}
+}
+```
+
+2. Bauen und Testen:
 
 ```bash
 pnpm build
@@ -153,13 +234,13 @@ pnpm test-update # Visual Snapshots aktualisieren
 
 #### Assets und Visual Tests
 
-Die Visual Tests benötigen korrekt geladene Assets (Schriftarten und Icons), um aussagekräftige Screenshots zu erstellen:
+Visual Tests benötigen korrekt geladene Assets (Schriftarten und Icons), um aussagekräftige Screenshots zu erstellen:
 
 - **inject-assets.css** - Zentrale Asset-Injektionsdatei mit @import-Anweisungen für:
   - `assets/material-symbols-subset/style.css` - Reduziertes Material Icons Set
   - `assets/fira-sans-v17-latin/style.css` - Fira Sans Schriftfamilie (400-700)
 
-Die Visual Tests setzen `THEME_CSS=$(pwd)/inject-assets.css`, um genau diese Datei in die Beispiel-Anwendung zu laden.
+Visual Tests setzen `THEME_CSS=$(pwd)/inject-assets.css`, um diese Datei in die Beispiel-Anwendung zu laden.
 
 **Wichtig**: Ohne korrekt geladene Assets würden Visual Tests fälschlicherweise als "geändert" erkannt, da Fallback-Schriftarten oder fehlende Icons verwendet würden.
 
@@ -195,6 +276,16 @@ pnpm test    # Visual Tests validieren
 2. **Component-Isolation** - Component-Styles betreffen nur ihre Component
 3. **Globale Zurückhaltung** - Globaler Layer nur für theme-weite Variablen und Host-Styles
 4. **Kein Layer-Mixing** - Layered und nicht-layered CSS nicht in derselben Datei mischen
+5. **Respect KERN UX standards** – never modify files in `src/kern/`, only consume their variables
+
+## KERN UX integration rules
+
+- **`@kern-ux/native` package** – official KERN UX standards as external dependency
+- **CSS import** – use `@import '@kern-ux/native/dist/kern.css'` for the KERN base
+- **KERN variables** – use `var(--kern-*)` CSS custom properties in theme styles
+- **Package updates** – update KERN UX standards with `pnpm update @kern-ux/native`
+- **Local additions** – extra tokens from `src/kern/` remain active until the package covers them fully
+- **CSS-centric** – the package is optimised for CSS distribution, not granular Sass imports
 
 ## Konfigurationsdateien
 
@@ -206,9 +297,65 @@ pnpm test    # Visual Tests validieren
 | `prettier.config.js` | Code-Formatierungsregeln                       |
 | `stylelint-rules/`   | Custom Stylelint-Regel-Implementierungen       |
 
-## Fehlerbehebung
+## Kern Design System integration
 
-### Häufige Probleme
+### Design tokens
+
+**KERN design standards are provided via the `@kern-ux/native` package:**
+
+```scss
+// Import the KERN CSS base
+@import '@kern-ux/native/dist/kern.css';
+```
+
+**Key architectural decision**: the `@kern-ux/native` package is primarily designed for CSS distribution, not granular Sass imports. Therefore the complete KERN CSS base is included as a CSS import.
+
+### Using the KERN UX standards
+
+```scss
+// ✅ Correct: use KERN CSS variables in theme components
+@layer kol-theme-component {
+	.button {
+		background: var(--kern-color-primary); // Use KERN variable
+		border-radius: var(--kern-border-radius); // Use KERN variable
+		font-family: var(--kern-font-family); // Use KERN variable
+	}
+}
+
+// ✅ Correct: import KERN CSS as base
+@import '@kern-ux/native/dist/kern.css';
+
+// ❌ Not available: granular Sass imports (package limitation)
+// @use '@kern-ux/native/src/scss/core/tokens' as kern-tokens; // Not supported
+```
+
+**Interaction between `src/kern/` and `@kern-ux/native`:**
+
+- `@kern-ux/native` supplies the standard KERN variables via CSS import
+- `src/kern/` contains additional tokens and workarounds that the package does not yet provide
+- Keep local tokens lightweight and document deviations for a future migration
+- CSS custom properties (`--kern-*`) remain usable without changes
+
+### Typography
+
+The KERN typography system is supplied via the CSS base from `@kern-ux/native`:
+
+- Font families and weights
+- Heading styles and hierarchy
+- Text sizes and spacing
+
+### Colour system
+
+```scss
+// KERN colour tokens (use only, do not modify!)
+--kern-color-primary: #0073e6;
+--kern-color-secondary: #6c757d;
+--kern-color-success: #28a745;
+--kern-color-warning: #ffc107;
+--kern-color-danger: #dc3545;
+```
+
+## Häufige Probleme
 
 **Stylelint Layer-Fehler:**
 
@@ -234,9 +381,10 @@ pnpm test-update  # Snapshots aktualisieren wenn Änderungen beabsichtigt sind
 
 ### Hilfe bekommen
 
-1. Untersuchen Sie bestehende Component-Implementierungen in `src/components/`.
-2. Prüfen Sie die Custom Stylelint-Regeln in `stylelint-rules/`.
-3. Führen Sie `pnpm lint` für spezifische Fehlermeldungen aus.
+1. Überprüfen Sie die [KERN UX-Standard](https://gitlab.opencode.de/kern-ux).
+2. Untersuchen Sie bestehende Component-Implementierungen in `src/components/`.
+3. Prüfen Sie die Custom Stylelint-Regeln in `stylelint-rules/`.
+4. Führen Sie `pnpm lint` für spezifische Fehlermeldungen aus.
 
 ## Service Worker Cache-Probleme in Chrome
 
