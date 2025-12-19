@@ -1,8 +1,11 @@
-assets/**
+# Ignore build and distribution directories
+assets/kolicons/
+assets/kolibri.ico
 dist/
 node_modules/
 test-results/
 
+# Ignore system files and logs
 .DS_Store
 *.log
 *.tgz
