@@ -4,39 +4,40 @@
 @mixin button($block-classname) {
 	.#{$block-classname} {
 		&__text {
-			// Base styles
-			border-radius: 4px;
-			border-width: 1px;
-			border-style: solid;
-			font-weight: 600;
-			padding: 10px 16px;
-			transition: all 200ms ease-in-out;
-
-			// Minimum touch target size (44px)
-			min-height: 44px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 8px;
+			color: var(--text-color);
 
 			// Default: normal variant (uses theme colors)
 			background-color: var(--background-color);
-			color: var(--text-color);
 			border-color: var(--text-color);
+			border-style: solid;
+			// Base styles
+			border-radius: 4px;
+			display: flex;
+
+			// Minimum touch target size (44px)
+			min-height: 44px;
+			padding: 10px 16px;
+			border-width: 1px;
+			gap: 8px;
+			align-items: center;
+			justify-content: center;
+
+			font-weight: 600;
+			transition: all 200ms ease-in-out;
 		}
 
 		// ========== FOCUS STYLES (Keyboard Navigation) ==========
 		&:focus-visible {
 			outline: 3px solid var(--primary-color);
-			outline-offset: 2px;
 			border-radius: 4px;
+			outline-offset: 2px;
 		}
 
 		// ========== HOVER STATES ==========
 		&:not(:disabled, [aria-disabled='true']):hover {
 			.#{$block-classname}__text {
 				transform: translateY(-2px);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+				box-shadow: 0 4px 12px rgb(0, 0, 0, 0.15);
 			}
 		}
 
@@ -44,7 +45,7 @@
 		&:not(:disabled, [aria-disabled='true']):active {
 			.#{$block-classname}__text {
 				transform: translateY(0);
-				box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+				box-shadow: inset 0 2px 4px rgb(0, 0, 0, 0.1);
 			}
 		}
 
@@ -54,11 +55,11 @@
 			cursor: not-allowed;
 
 			.#{$block-classname}__text {
-				background-color: color-mix(in srgb, var(--text-color) 20%, var(--background-color));
-				color: color-mix(in srgb, var(--text-color) 50%, var(--background-color));
-				border-color: color-mix(in srgb, var(--text-color) 30%, var(--background-color));
 				opacity: 1;
+				color: color-mix(in srgb, var(--text-color) 50%, var(--background-color));
+				background-color: color-mix(in srgb, var(--text-color) 20%, var(--background-color));
 				filter: grayscale(60%);
+				border-color: color-mix(in srgb, var(--text-color) 30%, var(--background-color));
 			}
 
 			// Remove hover effects on disabled
@@ -73,8 +74,8 @@
 		// ========== PRIMARY VARIANT ==========
 		&--primary {
 			.#{$block-classname}__text {
-				background-color: var(--primary-color);
 				color: var(--text-contrast-color);
+				background-color: var(--primary-color);
 				border-color: var(--primary-color);
 
 				kol-icon {
@@ -108,8 +109,8 @@
 		// ========== SECONDARY VARIANT ==========
 		&--secondary {
 			.#{$block-classname}__text {
-				background-color: var(--accent-color);
 				color: var(--text-contrast-color);
+				background-color: var(--accent-color);
 				border-color: var(--accent-color);
 
 				kol-icon {
@@ -143,8 +144,8 @@
 		// ========== TERTIARY VARIANT ==========
 		&--tertiary {
 			.#{$block-classname}__text {
-				background-color: transparent;
 				color: var(--primary-color);
+				background-color: transparent;
 				border-color: var(--primary-color);
 
 				kol-icon {
@@ -154,9 +155,9 @@
 
 			&:not(:disabled, [aria-disabled='true']):hover {
 				.#{$block-classname}__text {
+					color: color-mix(in srgb, var(--primary-color) 80%, black);
 					background-color: color-mix(in srgb, var(--primary-color) 10%, var(--background-color));
 					border-color: color-mix(in srgb, var(--primary-color) 80%, black);
-					color: color-mix(in srgb, var(--primary-color) 80%, black);
 
 					kol-icon {
 						color: color-mix(in srgb, var(--primary-color) 80%, black);
@@ -166,9 +167,9 @@
 
 			&:not(:disabled, [aria-disabled='true']):active {
 				.#{$block-classname}__text {
+					color: color-mix(in srgb, var(--primary-color) 60%, black);
 					background-color: color-mix(in srgb, var(--primary-color) 20%, var(--background-color));
 					border-color: color-mix(in srgb, var(--primary-color) 60%, black);
-					color: color-mix(in srgb, var(--primary-color) 60%, black);
 
 					kol-icon {
 						color: color-mix(in srgb, var(--primary-color) 60%, black);
@@ -180,8 +181,8 @@
 		// ========== DANGER VARIANT ==========
 		&--danger {
 			.#{$block-classname}__text {
-				background-color: #c0392b;
 				color: var(--text-contrast-color);
+				background-color: #c0392b;
 				border-color: #c0392b;
 
 				kol-icon {
@@ -215,10 +216,10 @@
 		// ========== GHOST VARIANT ==========
 		&--ghost {
 			.#{$block-classname}__text {
-				background-color: transparent;
 				color: var(--primary-color);
-				border-color: var(--primary-color);
+				background-color: transparent;
 				box-shadow: none;
+				border-color: var(--primary-color);
 
 				kol-icon {
 					color: var(--primary-color);
@@ -227,9 +228,9 @@
 
 			&:not(:disabled, [aria-disabled='true']):hover {
 				.#{$block-classname}__text {
+					color: color-mix(in srgb, var(--primary-color) 80%, black);
 					background-color: color-mix(in srgb, var(--primary-color) 10%, var(--background-color));
 					border-color: color-mix(in srgb, var(--primary-color) 80%, black);
-					color: color-mix(in srgb, var(--primary-color) 80%, black);
 
 					kol-icon {
 						color: color-mix(in srgb, var(--primary-color) 80%, black);
@@ -239,9 +240,9 @@
 
 			&:not(:disabled, [aria-disabled='true']):active {
 				.#{$block-classname}__text {
+					color: color-mix(in srgb, var(--primary-color) 60%, black);
 					background-color: color-mix(in srgb, var(--primary-color) 20%, var(--background-color));
 					border-color: color-mix(in srgb, var(--primary-color) 60%, black);
-					color: color-mix(in srgb, var(--primary-color) 60%, black);
 
 					kol-icon {
 						color: color-mix(in srgb, var(--primary-color) 60%, black);
