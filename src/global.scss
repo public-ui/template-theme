@@ -1,0 +1,43 @@
+@use '~@public-ui/components/index' as *;
+@use './global/properties' as *;
+
+@layer kol-theme-global {
+	// Properties
+	:host {
+		@include light;
+		color-scheme: light;
+
+		@media (prefers-color-scheme: dark) {
+			@include dark;
+			color-scheme: dark;
+		}
+	}
+
+	// Base styles
+	:host {
+		font-family: var(--font-family);
+		font-size: to-rem(14);
+	}
+
+	// Tooltip styles
+	.kol-tooltip {
+		&__floating {
+			border-radius: 4px;
+			border: 1px solid #bbb;
+		}
+
+		&__arrow {
+			background-color: #bbb;
+		}
+
+		&__content {
+			color: var(--text-contrast-color);
+			background-color: var(--tooltip-background-color);
+			border-radius: 4px;
+			max-width: to-rem(400);
+			padding: to-rem(6) to-rem(12);
+
+			line-height: 1.55;
+		}
+	}
+}

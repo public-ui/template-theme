@@ -1,0 +1,14 @@
+name: Continue Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'develop'
+      - 'main'
+      - 'release/*'
+  workflow_dispatch:
+
+jobs:
+  quality-gates:
+    uses: ./.github/workflows/quality-gates.yml
