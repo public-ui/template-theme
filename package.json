@@ -30,8 +30,8 @@
     "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.2",
     "@playwright/test": "1.57.0",
-    "@public-ui/components": "4.0.0-alpha.12",
-    "@public-ui/visual-tests": "4.0.0-alpha.12",
+    "@public-ui/components": "4.0.0-alpha.13",
+    "@public-ui/visual-tests": "4.0.0-alpha.13",
     "@rollup/plugin-commonjs": "29.0.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-typescript": "12.3.0",
@@ -42,7 +42,7 @@
     "cpy-cli": "6.0.0",
     "cross-env": "10.1.0",
     "eslint": "9.39.2",
-    "knip": "5.75.1",
+    "knip": "5.75.2",
     "nodemon": "3.1.11",
     "npm-check-updates": "19.2.0",
     "npm-run-all2": "8.0.4",
@@ -60,7 +60,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@public-ui/components": "4.0.0-alpha.12"
+    "@public-ui/components": "4.0.0-alpha.13"
   },
   "exports": {
     ".": {
