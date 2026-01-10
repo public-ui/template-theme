@@ -1,0 +1,74 @@
+name: Auto Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Runs daily at 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.verify-changed-files.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          version: 10
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v5
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store
+
+      - name: Install
+        run: pnpm i --no-frozen-lockfile
+      - name: Update dependencies (minor)
+        run: |
+          pnpm run update
+          # Run the recursive update twice so peer and dev dependency bumps align after the first pass adjusts peer ranges.
+          pnpm run update
+      - name: Reinstall dependencies
+        run: pnpm i --no-frozen-lockfile
+      - name: Fix format
+        run: pnpm format -w
+
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: auto-update-deps
+          commit-message: 'chore: update dependencies and lock file'
+          title: 'chore: update dependencies and lock file'
+          body: 'Automated dependency updates.'
+          delete-branch: true
+
+  quality-gates:
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    uses: ./.github/workflows/quality-gates.yml

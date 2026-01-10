@@ -1,0 +1,28 @@
+# Custom assets folder
+
+This folder contrains custom assets for the template theme and
+will be included in the final build package of the theme. To
+ensure that the folder is tracked by git, this file is included
+as a placeholder.
+
+`package.json` changes to copy assets:
+
+```json
+"scripts": {
+	"prepare": "cpy \"node_modules/@public-ui/components/assets/**/*\" assets --dot",
+  ...other scripts
+},
+"devDependencies": {
+	"cpy-cli": "6.0.0",
+  ...other dependencies
+}
+```
+
+
+
+`.gitignore` changes to avoid ignoring the assets folder:
+
+```bash
+!assets/kolicons/
+!assets/kolibri.ico
+```

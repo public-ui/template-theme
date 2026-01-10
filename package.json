@@ -1,0 +1,89 @@
+{
+  "name": "custom-theme",
+  "version": "1.0.0",
+  "description": "This package contains the style information to make KoliBri web components look as your custom design system.",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c",
+    "clean": "git clean -f -d -X",
+    "dev": "rollup -c --watch",
+    "format": "prettier --check .",
+    "init-theme": "node scripts/init-theme.js",
+    "lint": "pnpm lint:eslint && pnpm lint:stylelint && pnpm lint:tsc",
+    "lint:eslint": "eslint src",
+    "lint:stylelint": "stylelint \"src/**/*.{css,scss}\"",
+    "lint:tsc": "tsc --noemit",
+    "prepack": "pnpm build",
+    "prepare": "cpy \"node_modules/@public-ui/components/assets/**/*\" assets --dot",
+    "start": "npm-run-all2 --parallel dev serve",
+    "serve": "sh serve.sh",
+    "smoke-test": "pnpm clean && pnpm install && pnpm build && pnpm format && pnpm lint && pnpm unused && pnpm test",
+    "test": "cross-env THEME_MODULE=dist THEME_EXPORT=CUSTOM_THEME THEME_CSS=$(pwd)/inject-assets.css kolibri-visual-test theme-snapshots.spec.js",
+    "test-update": "cross-env THEME_MODULE=dist THEME_EXPORT=CUSTOM_THEME THEME_CSS=$(pwd)/inject-assets.css kolibri-visual-test --update-snapshots=changed theme-snapshots.spec.js",
+    "pretest": "pnpm build && playwright install firefox",
+    "pretest-update": "pnpm build && playwright install firefox",
+    "unused": "knip",
+    "update": "ncu -t minor -u && ncu"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.3.3",
+    "@eslint/js": "9.39.2",
+    "@playwright/test": "1.57.0",
+    "@public-ui/components": "4.0.0",
+    "@public-ui/visual-tests": "4.0.0",
+    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@rollup/plugin-typescript": "12.3.0",
+    "@typescript-eslint/eslint-plugin": "8.52.0",
+    "@typescript-eslint/parser": "8.52.0",
+    "adopted-style-sheets": "1.1.9-rc.20",
+    "autoprefixer": "10.4.23",
+    "cpy-cli": "6.0.0",
+    "cross-env": "10.1.0",
+    "eslint": "9.39.2",
+    "knip": "5.80.2",
+    "nodemon": "3.1.11",
+    "npm-check-updates": "19.3.1",
+    "npm-run-all2": "8.0.4",
+    "postcss": "8.5.6",
+    "prettier": "3.7.4",
+    "prettier-plugin-organize-imports": "4.3.0",
+    "rollup": "4.55.1",
+    "rollup-plugin-postcss": "4.0.2",
+    "sass": "1.97.2",
+    "stylelint": "16.26.1",
+    "stylelint-config-recommended-scss": "16.0.2",
+    "stylelint-config-standard": "39.0.1",
+    "stylelint-order": "7.0.1",
+    "stylelint-scss": "6.14.0",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "@public-ui/components": "4.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "assets",
+    "dist",
+    "CONTRIBUTING.en.md",
+    "CONTRIBUTING.md",
+    "README.en.md",
+    "README.md"
+  ],
+  "engines": {
+    "pnpm": "^10"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}

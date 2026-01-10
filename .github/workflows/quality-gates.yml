@@ -1,0 +1,49 @@
+name: Quality Gates
+
+on:
+  workflow_call:
+    inputs:
+      run-audit:
+        description: 'Run pnpm audit'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: ./.github/actions/pnpm-setup
+        with:
+          frozen-lockfile: 'true'
+
+      - name: Run audit
+        if: inputs.run-audit
+        run: pnpm audit --audit-level high
+
+      - name: Run build
+        run: pnpm build
+
+      - name: Run format
+        run: pnpm format
+
+      - name: Run lint
+        run: pnpm lint
+
+      - name: Run test
+        run: pnpm test
+
+      - name: Run unused
+        run: pnpm unused
+
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: reports
+          path: |
+            test-results/**/*.png
+            !**/node_modules
