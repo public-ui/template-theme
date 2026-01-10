@@ -2,7 +2,7 @@ name: Auto Dependency Updates
 
 on:
   schedule:
-    - cron: '0 2 * * 1' # Runs weekly on Monday at 02:00 UTC
+    - cron: '0 2 * * *' # Runs daily at 02:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -14,28 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.verify-changed-files.outputs.changed }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - base: develop
-            version: v4
-          - base: release/3
-            version: v3
-          - base: release/2
-            version: v2
-          # - base: release/1
-          #   version: v1
-    env:
-      version: ${{ matrix.version }}
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ matrix.base }}
           persist-credentials: false
       - uses: actions/setup-node@v6
         with:
-          # cache: pnpm
           node-version: 22
       - uses: pnpm/action-setup@v4
         id: pnpm-install
@@ -57,9 +41,9 @@ jobs:
         run: pnpm i --no-frozen-lockfile
       - name: Update dependencies (minor)
         run: |
-          pnpm ncu:minor
+          pnpm run update
           # Run the recursive update twice so peer and dev dependency bumps align after the first pass adjusts peer ranges.
-          pnpm ncu:minor
+          pnpm run update
       - name: Reinstall dependencies
         run: pnpm i --no-frozen-lockfile
       - name: Fix format
@@ -78,11 +62,10 @@ jobs:
         if: steps.verify-changed-files.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
-          base: ${{ matrix.base }}
-          branch: ${{ env.version }}/auto-update-deps
+          branch: auto-update-deps
           commit-message: 'chore: update dependencies and lock file'
-          title: 'chore(${{ env.version }}): update dependencies and lock file'
-          body: 'Automated dependency updates for ${{ env.version }}.'
+          title: 'chore: update dependencies and lock file'
+          body: 'Automated dependency updates.'
           delete-branch: true
 
   quality-gates:
