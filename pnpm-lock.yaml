@@ -18,11 +18,11 @@ importers:
         specifier: 1.57.0
         version: 1.57.0
       '@public-ui/components':
-        specifier: 4.0.0-rc.4
-        version: 4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)
+        specifier: 4.0.0
+        version: 4.0.0(adopted-style-sheets@1.1.9-rc.20)
       '@public-ui/visual-tests':
-        specifier: 4.0.0-rc.4
-        version: 4.0.0-rc.4(@playwright/test@1.57.0)(axe-core@4.11.0)(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(playwright-core@1.57.0)(sass@1.97.2)
+        specifier: 4.0.0
+        version: 4.0.0(@playwright/test@1.57.0)(axe-core@4.11.0)(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(playwright-core@1.57.0)(sass@1.97.2)
       '@rollup/plugin-commonjs':
         specifier: 29.0.0
         version: 29.0.0(rollup@4.55.1)
@@ -748,36 +748,36 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@public-ui/components@4.0.0-rc.4':
-    resolution: {integrity: sha512-B/+GS5bRB5OWXAM+oz4fAYtWfDuQQan3MXu6bkw2c6HdFZ6DsiYz49rQzrVWdt+sDFD530pZJJL9+JOEDyVjVw==}
+  '@public-ui/components@4.0.0':
+    resolution: {integrity: sha512-RWns2IMeRhoH0uSbTxOO9NInECaRR6XdKUs6V2jzo2bmVYKCvzmyB2tlbZjoaD3nRZ68dZ7gh35JNg5NuGZj2Q==}
     peerDependencies:
       adopted-style-sheets: 1.1.9-rc.20
 
-  '@public-ui/react-hook-form-adapter@4.0.0-rc.4':
-    resolution: {integrity: sha512-5fFBNU35rTZzFkyaeiu3OszlspRXMihgccRiV2gOGK2rKYxzgrgCyTcZMfIf88JV49Rh5IIAAEuL+pfy9c3MMg==}
+  '@public-ui/react-hook-form-adapter@4.0.0':
+    resolution: {integrity: sha512-q4JnfMDbiqdvMc7wTC5iHVv7TnxakltNm+FycsDbQEqxfulaSVboFrh3BbU7Zbx53r676eBWmrG0Pwa0qfSePw==}
     peerDependencies:
-      '@public-ui/components': 4.0.0-rc.4
-      '@public-ui/react-v19': 4.0.0-rc.4
+      '@public-ui/components': 4.0.0
+      '@public-ui/react-v19': 4.0.0
       react: ^19
       react-hook-form: ^7
 
-  '@public-ui/react-v19@4.0.0-rc.4':
-    resolution: {integrity: sha512-uiddqZdH6VUA/iCvmCWDg3oywDsGNSDQLSn5FLvJAEnh/Dc+4xbcN33+txK5sAG6SRnP8zk1GzU1nQHcCjMiLQ==}
+  '@public-ui/react-v19@4.0.0':
+    resolution: {integrity: sha512-5uISjqs4LObirn6B4NjdosQGoOsm6RYD5vB+5eKuVVdCX7wPGRE06hd4+yv0FxE0+vs28tGM+hQxb17xncMLcw==}
     peerDependencies:
-      '@public-ui/components': 4.0.0-rc.4
+      '@public-ui/components': 4.0.0
       react: ^19.2.3
       react-dom: ^19.2.3
 
-  '@public-ui/sample-react@4.0.0-rc.4':
-    resolution: {integrity: sha512-KcICWE/01JHLVBimgLVT27TLCpEpXGLVxpVArcnR3pUaIRGFXnBuTerQmNhbB/63PHmP2TwA1SoAw4InOtXxOA==}
+  '@public-ui/sample-react@4.0.0':
+    resolution: {integrity: sha512-665Dr1zW9RewPyA8vsk7Rryell+079wt19yhPTxZ59JnMN6BigZzeUNPJ1IfigI0BjSwqB/KFLxqifjZpzed3A==}
 
-  '@public-ui/themes@4.0.0-rc.4':
-    resolution: {integrity: sha512-HzdCCE442AIcQjqhU9UgEyV5sC86LlddsKh/jLbba4xurExmMSGpFUhZvdK5aCdcYdzc0+0Ws0UW1WL+sus3Ew==}
+  '@public-ui/themes@4.0.0':
+    resolution: {integrity: sha512-Of9sYl4S3vj+A+WaevEAvrD8if3UD/pp6PCnDuKKqG7FGeTx4R4oDIHh7VT6AWa1J6KhLkPm/8y4Bz8fc6evOw==}
     peerDependencies:
-      '@public-ui/components': 4.0.0-rc.4
+      '@public-ui/components': 4.0.0
 
-  '@public-ui/visual-tests@4.0.0-rc.4':
-    resolution: {integrity: sha512-9G8bRKVkMIAkENhevKOXFADv/a0LGGBBPFuwfNJM0AAL4BXnB28NvfoWABXg1UJG/wN2dwn+vPTQvwy9x/1ZpQ==}
+  '@public-ui/visual-tests@4.0.0':
+    resolution: {integrity: sha512-DnODu/12z13HPDl/q/SmVe0nDJtRkcgWxd/cCR17xD3Br8C4BxhTwdL36LtXJWo9pPs16AFq7qmD/OoMTlS8/A==}
     engines: {pnpm: ^10}
     hasBin: true
     peerDependencies:
@@ -5632,7 +5632,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)':
+  '@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20)':
     dependencies:
       '@floating-ui/dom': 1.7.4
       adopted-style-sheets: 1.1.9-rc.20
@@ -5650,28 +5650,28 @@ snapshots:
       typed-bem: 1.0.2
       wcag-contrast: 3.0.0
 
-  '@public-ui/react-hook-form-adapter@4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(@public-ui/react-v19@4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-hook-form@7.70.0(react@19.2.3))(react@19.2.3)':
+  '@public-ui/react-hook-form-adapter@4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(@public-ui/react-v19@4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-hook-form@7.70.0(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@public-ui/components': 4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)
-      '@public-ui/react-v19': 4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@public-ui/components': 4.0.0(adopted-style-sheets@1.1.9-rc.20)
+      '@public-ui/react-v19': 4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react: 19.2.3
       react-hook-form: 7.70.0(react@19.2.3)
 
-  '@public-ui/react-v19@4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@public-ui/react-v19@4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@public-ui/components': 4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)
+      '@public-ui/components': 4.0.0(adopted-style-sheets@1.1.9-rc.20)
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@public-ui/sample-react@4.0.0-rc.4(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(sass@1.97.2)':
+  '@public-ui/sample-react@4.0.0(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(sass@1.97.2)':
     dependencies:
       '@hookform/resolvers': 3.10.0(react-hook-form@7.70.0(react@19.2.3))
       '@leanup/stack': 1.3.54(chromedriver@138.0.4)(esbuild@0.27.2)(typescript@5.9.3)
       '@playwright/test': 1.57.0
-      '@public-ui/components': 4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)
-      '@public-ui/react-hook-form-adapter': 4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(@public-ui/react-v19@4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-hook-form@7.70.0(react@19.2.3))(react@19.2.3)
-      '@public-ui/react-v19': 4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      '@public-ui/themes': 4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))
+      '@public-ui/components': 4.0.0(adopted-style-sheets@1.1.9-rc.20)
+      '@public-ui/react-hook-form-adapter': 4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(@public-ui/react-v19@4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-hook-form@7.70.0(react@19.2.3))(react@19.2.3)
+      '@public-ui/react-v19': 4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@public-ui/themes': 4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))
       '@stencil/core': 4.41.0
       '@types/node': 24.10.4
       '@types/react': 19.2.7
@@ -5726,15 +5726,15 @@ snapshots:
       - vue-tsc
       - yaml
 
-  '@public-ui/themes@4.0.0-rc.4(@public-ui/components@4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20))':
+  '@public-ui/themes@4.0.0(@public-ui/components@4.0.0(adopted-style-sheets@1.1.9-rc.20))':
     dependencies:
-      '@public-ui/components': 4.0.0-rc.4(adopted-style-sheets@1.1.9-rc.20)
+      '@public-ui/components': 4.0.0(adopted-style-sheets@1.1.9-rc.20)
 
-  '@public-ui/visual-tests@4.0.0-rc.4(@playwright/test@1.57.0)(axe-core@4.11.0)(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(playwright-core@1.57.0)(sass@1.97.2)':
+  '@public-ui/visual-tests@4.0.0(@playwright/test@1.57.0)(axe-core@4.11.0)(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(playwright-core@1.57.0)(sass@1.97.2)':
     dependencies:
       '@axe-core/playwright': 4.11.0(playwright-core@1.57.0)
       '@playwright/test': 1.57.0
-      '@public-ui/sample-react': 4.0.0-rc.4(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(sass@1.97.2)
+      '@public-ui/sample-react': 4.0.0(chromedriver@138.0.4)(esbuild@0.27.2)(jiti@2.6.1)(less@4.2.0)(sass@1.97.2)
       axe-html-reporter: 2.2.11(axe-core@4.11.0)
       portfinder: 1.0.38
       serve: 14.2.5
