@@ -27,29 +27,29 @@
     "update": "ncu -t minor -u && ncu"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.3",
-    "@eslint/js": "9.39.2",
+    "@eslint/eslintrc": "3.3.5",
+    "@eslint/js": "9.39.4",
     "@playwright/test": "1.58.2",
-    "@public-ui/components": "4.0.3",
-    "@public-ui/visual-tests": "4.0.3",
-    "@rollup/plugin-commonjs": "29.0.0",
+    "@public-ui/components": "4.1.0",
+    "@public-ui/visual-tests": "4.1.0",
+    "@rollup/plugin-commonjs": "29.0.2",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-typescript": "12.3.0",
-    "@typescript-eslint/eslint-plugin": "8.54.0",
-    "@typescript-eslint/parser": "8.54.0",
-    "adopted-style-sheets": "1.1.9-rc.20",
-    "autoprefixer": "10.4.24",
+    "@typescript-eslint/eslint-plugin": "8.56.1",
+    "@typescript-eslint/parser": "8.56.1",
+    "adopted-style-sheets": "1.1.9-rc.21",
+    "autoprefixer": "10.4.27",
     "cpy-cli": "6.0.0",
     "cross-env": "10.1.0",
-    "eslint": "9.39.2",
-    "knip": "5.83.1",
-    "nodemon": "3.1.11",
-    "npm-check-updates": "19.3.2",
+    "eslint": "9.39.4",
+    "knip": "5.86.0",
+    "nodemon": "3.1.14",
+    "npm-check-updates": "19.6.3",
     "npm-run-all2": "8.0.4",
-    "postcss": "8.5.6",
+    "postcss": "8.5.8",
     "prettier": "3.8.1",
     "prettier-plugin-organize-imports": "4.3.0",
-    "rollup": "4.57.1",
+    "rollup": "4.59.0",
     "rollup-plugin-postcss": "4.0.2",
     "sass": "1.97.3",
     "stylelint": "16.26.1",
@@ -60,7 +60,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@public-ui/components": "4.0.3"
+    "@public-ui/components": "4.1.0"
   },
   "exports": {
     ".": {
